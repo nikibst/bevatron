@@ -23,3 +23,7 @@ Install Kafka in Kubernetes
 1. ```kubectl create namespace kafka```
 2. Download https://github.com/Yolean/kubernetes-kafka
 3. Go to repo root and do: ```kubectl apply -k ./variants/dev-small```
+
+Then expose Kong and Kafka:
+1. ```minikube tunnel``` so Kong can be accessible from outside
+2. Expose Kafka only for testing: ```kubectl -n kafka port-forward kafka-0 9094```
