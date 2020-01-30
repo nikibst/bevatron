@@ -1,0 +1,190 @@
+=== Case Study ===
+An event is called happening to not be confused with programming events
+A happening is hosted in a venue
+A happening can be: finished, not_started, started
+A venue has sectors
+A sector has rows
+A row has seats
+A ticket is published for a seat
+A ticket has status: sold, available
+A ticket has a price
+A user can register
+A user can sign in
+A user can define payment methods: paypal, credit card, etc.
+A signed in user can buy one or more tickets for a happening
+A user can pay for the eligible ticket
+A user can favorite a happening
+
+
+
+======= Features ======
+- Registration with form, Google, Facebook
+- Sign In
+- Remember me
+- Forgot you password
+- Confirmation email or SMS
+- User Profile
+- User Favorites
+- User Payment Methods
+- User Settings
+- User Orders
+- Helpdesk
+- Search for events
+- Browse events by category
+- See specific event
+- Book a ticket
+- Make a payment (Paypal, credit card, etc)
+- Popular happenings
+- Privacy Policy
+- About Us
+
+
+===== Invariants =====
+- A venue cannot be occupied by two or more different happenings at the same time.
+- A ticket cannot be sell twice.
+- A ticket can only be sold for a NOT_STARTED happening.
+- A user cannot have more than one tickets for the same event.
+- User email must be unique and identity.
+
+- A user can favorite only a not_started happening
+- A happening must be removed from user favorites when it is finished
+- A seat can be occupied by a user only if a ticket has been published for that seat
+- No more than one ticket can be published for the same seat for the same happening
+- A ticket for a specific happening can be sold only once
+
+- User can post only one review per happening
+- To post a user review, the happening must be finished
+- We must ensure that the user attended the happening so he can post a review
+
+
+
+
+
+======= Data ========
+
+=== user ===
+user_id
+first_name
+last_name
+date_of_birth
+country
+city
+zip_code
+street_no
+phone
+mobile_phone
+email
+password
+created_at
+updated_at
+is_active
+email_confirmed
+
+
+=== happening_category ===
+happening_category_id
+name
+parent_id
+created_at
+updated_at
+
+=== happening ===
+happening_id
+title
+description
+status ---> NOT_STARTED, STARTED, FINISHED
+starting_date
+created_at
+updated_at
+
+=== happening_to_category ===
+happening_id
+happening_category_id
+
+=== venue ===
+venue_id
+name
+
+=== venue_sector ===
+venue_sector_id
+venue_id
+
+=== venue_row ===
+venue_sector_id
+row
+
+=== venue_seat ===
+venue_row_id
+seat
+
+=== ticket ===
+ticket_id
+happening_id
+venue_seat_id
+venue_row_id
+venue_sector_id
+venue_id
+price
+is_occupied
+is_available
+created_at
+updated_at
+
+=== ticket_type ===
+ticket_id
+type ---> STANDARD, VIP
+
+=== venue_location ===
+venue_location_id
+country
+city
+street_no
+
+=== happening_to_venue ===
+happening_id
+venue_id
+
+=== user_happening_favorites ===
+user_happening_favorites_id
+happening_id
+user_id
+
+=== user_review ===
+user_id
+title
+description
+rating
+created_at
+updated_at
+
+=== user_review_to_happening ===
+user_review_id
+happening_id
+
+
+
+===== Possible bounted contexts =====
+=== User ===
+- Registration
+- Sign In
+- Forgot your password
+- Confirmation email or SMS confirmation
+- User Profile
+
+=== Events ===
+
+=== Event Categories ===
+
+=== Tickets ===
+
+=== Venues ===
+
+=== Payments ===
+
+=== Orders ===
+
+=== Vouchers ===
+
+=== Helpdesk ===
+
+=== User Favorites ===
