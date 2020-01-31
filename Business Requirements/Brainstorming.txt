@@ -1,5 +1,6 @@
 === Case Study ===
 An event is called happening to not be confused with programming events
+A happeing happens on a date or a range of dates
 A happening is hosted in a venue
 A happening can be: finished, not_started, started
 A venue has sectors
@@ -11,8 +12,8 @@ A ticket has a price
 A user can register
 A user can sign in
 A user can define payment methods: paypal, credit card, etc.
-A signed in user can buy one or more tickets for a happening
-A user can pay for the eligible ticket
+A user can place an order
+An order is composed by one or more tickets
 A user can favorite a happening
 
 
@@ -29,6 +30,7 @@ A user can favorite a happening
 - User Settings
 - User Orders
 - Helpdesk
+- Happenings Calendar
 - Search for events
 - Browse events by category
 - See specific event
@@ -37,26 +39,29 @@ A user can favorite a happening
 - Popular happenings
 - Privacy Policy
 - About Us
+- Email Newsletter
+- Email Reengagement
+- Email finish you payemnt
 
 
 ===== Invariants =====
-- A venue cannot be occupied by two or more different happenings at the same time.
-- A ticket cannot be sell twice.
-- A ticket can only be sold for a NOT_STARTED happening.
 - A user cannot have more than one tickets for the same event.
 - User email must be unique and identity.
 
-- A user can favorite only a not_started happening
-- A happening must be removed from user favorites when it is finished
+- A venue cannot be occupied by two or more different happenings at the same time.
+
 - A seat can be occupied by a user only if a ticket has been published for that seat
-- No more than one ticket can be published for the same seat for the same happening
-- A ticket for a specific happening can be sold only once
+- No more than one ticket can be published for the same seat for the same happening on the same date
+- A ticket for a specific happening on the same date can be sold only once
+- A ticket cannot be sell twice
+- A ticket can only be sold for a NOT_STARTED happening
 
 - User can post only one review per happening
 - To post a user review, the happening must be finished
 - We must ensure that the user attended the happening so he can post a review
 
-
+- A user can favorite only a not_started happening
+- A happening must be removed from user favorites when it is finished
 
 
 
@@ -164,16 +169,17 @@ happening_id
 
 
 ===== Possible bounted contexts =====
-=== User ===
+=== Authentication ===
 - Registration
 - Sign In
 - Forgot your password
 - Confirmation email or SMS confirmation
-- User Profile
 
-=== Events ===
+=== Happenings listing ===
+- Search with filters
+- List Happenings
 
-=== Event Categories ===
+=== Happening Categories ===
 
 === Tickets ===
 
@@ -188,3 +194,40 @@ happening_id
 === Helpdesk ===
 
 === User Favorites ===
+
+=== Reviews ===
+
+
+
+=== Possible events per bounted context ===
+=== User ===
+- user_created
+- user_confirmed
+- user_password_changed
+
+
+=== Happenings ===
+- happening_added
+- happeinging_started
+- happening_finished
+
+=== Tickets ===
+- ticket_reserved
+- ticket_sold
+
+=== Orders ===
+order_created
+order_cancelled
+
+=== Vouchers ===
+- voucher_created
+
+=== User favorites ===
+- user_favorite_added
+- user_favorite_removed
+- user_favorite_expired
+
+=== User reviews ===
+- user_review_created
+- user_review_published
+- user_review_deleted_by_user
