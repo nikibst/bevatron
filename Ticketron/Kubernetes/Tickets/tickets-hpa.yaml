@@ -1,0 +1,20 @@
+# kubectl apply -f tickets-hpa.yaml
+# https://github.com/oracle/kubernetes-website/blob/master/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough.md
+#  k delete pod sm-deployment-5dd986859d-dvprh --grace-period=0 --force
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sm-deployment
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sm-deployment
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50

@@ -1,6 +1,6 @@
 === Case Study ===
 An event is called happening to not be confused with programming events
-A happeing happens on a date or a range of dates
+A happening happens on a date or a range of dates
 A happening is hosted in a venue
 A happening can be: finished, not_started, started
 A venue has sectors
@@ -15,7 +15,7 @@ A user can define payment methods: paypal, credit card, etc.
 A user can place an order
 An order is composed by one or more tickets
 A user can favorite a happening
-
+A user can write a review for a happening
 
 
 ======= Features ======

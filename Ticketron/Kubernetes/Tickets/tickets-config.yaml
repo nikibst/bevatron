@@ -1,0 +1,6 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: tickets-config
+data:
+  APP_NAME: "SM App"
