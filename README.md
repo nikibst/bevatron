@@ -32,3 +32,4 @@ Replace kube-dns with CoreDNS:
 Then expose Kong and Kafka:
 1. ```minikube tunnel``` so Kong can be accessible from outside
 2. Expose Kafka only for testing: ```kubectl -n kafka port-forward kafka-0 9094```
+3. Expose Zookeeper: ```kubectl -n kafka port-forward pzoo-0 2181```
