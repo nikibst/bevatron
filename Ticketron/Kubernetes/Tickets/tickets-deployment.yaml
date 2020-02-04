@@ -15,9 +15,9 @@ spec:
         app: tickets-app
     spec:                     # Spec for the containers that will be run in the Pods
       containers:
-        - name: spring-boot
-          image: callicoder/tickets-app:1.0.0
-          imagePullPolicy: IfNotPresent
+        - name: tickets-spring-boot
+          image: nikitasbst/tickets-spring-boot
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080 # The port that the container exposes
@@ -41,19 +41,36 @@ spec:
                 secretKeyRef:
                   name: mysql-db-url
                   key: url
-        - name: tickets-mysql
-          image: mysql:5.6
-          env:
-            # Use secret in real usage
+        - image: mysql:5.6            # The container image
+          name: tickets-mysql
+          env:                        # Environment variables passed to the container
             - name: MYSQL_ROOT_PASSWORD
-              value: password
+              valueFrom:                # Read environment variables from kubernetes secrets
+                secretKeyRef:
+                  name: mysql-root-pass
+                  key: password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-db-url
+                  key: database
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-user-pass
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-user-pass
+                  key: password
           ports:
-            - containerPort: 3306
+            - containerPort: 49196        # The port that the container exposes
               name: mysql
           volumeMounts:
-            - name: mysql-persistent-storage
+            - name: mysql-persistent-storage  # This name should match the name specified in `volumes.name`
               mountPath: /var/lib/mysql
-          volumes:
-            - name: mysql-persistent-storage
-              persistentVolumeClaim:
-                claimName: mysql-pv-claim
+      volumes:                       # A PersistentVolume is mounted as a volume to the Pod
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: tickets-mysql-pv-claim

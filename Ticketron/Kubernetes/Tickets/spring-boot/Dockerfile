@@ -1,12 +1,12 @@
 FROM openjdk:8-jdk-alpine AS builder
-WORKDIR target/dependency
-ARG APPJAR=target/*.jar
+WORKDIR ../../../Code/Tickets/target/dependency
+ARG APPJAR=../../../Code/Tickets/target/tickets-0.0.1.jar
 COPY ${APPJAR} app.jar
 RUN jar -xf ./app.jar
 
 FROM openjdk:8-jre-alpine
 VOLUME /tmp
-ARG DEPENDENCY=target/dependency
+ARG DEPENDENCY=../../../Code/Tickets/target/dependency
 COPY --from=builder ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=builder ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=builder ${DEPENDENCY}/BOOT-INF/classes /app

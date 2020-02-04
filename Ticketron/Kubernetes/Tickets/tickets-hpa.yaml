@@ -4,15 +4,15 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: sm-deployment
+  name: tickets-deployment
   namespace: default
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: sm-deployment
-  minReplicas: 3
-  maxReplicas: 10
+    name: tickets-deployment
+  minReplicas: 1
+  maxReplicas: 3
   metrics:
     - type: Resource
       resource:

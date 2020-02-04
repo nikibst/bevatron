@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ticketron/Kubernetes/Kafka/cp-helm-charts" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Ticketron/Kubernetes/Kafka/kubernetes-kafka" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Ticketron/Microservices/Tickets/gs-spring-boot-docker" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/gs-spring-boot-docker" vcs="Git" />
   </component>

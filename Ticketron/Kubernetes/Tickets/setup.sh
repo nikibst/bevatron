@@ -23,9 +23,5 @@ kubectl apply -f tickets-secrets.yaml
 
 # Logs
 
-
-# Nginx ConfigMap
-kubectl apply -f sm-nginx-config.yaml
-
 # Deployment
 kubectl apply -f tickets-deployment.yaml
